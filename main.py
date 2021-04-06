@@ -1,5 +1,6 @@
 from tkinter import *
 import math
+import winsound
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -36,12 +37,15 @@ def start_timer():
     if reps % 8 == 0:
         countdown(longbreak_sec)
         timer.config(text="Break", fg=RED)
+        winsound.Beep(1000, 500)
     elif reps % 2 == 0:
         countdown(shortbreak_sec)
         timer.config(text="Break", fg=PINK)
+        winsound.Beep(1000, 500)
     else:
         countdown(work_sec)
         timer.config(text="Work", fg=GREEN)
+        winsound.Beep(800, 500)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
@@ -55,7 +59,7 @@ def countdown(count):
         count_sec = f"0{count_sec}"
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        timing = window.after(10, countdown, count - 1)
+        timing = window.after(1000, countdown, count - 1)
     else:
         start_timer()
         marks = ""
